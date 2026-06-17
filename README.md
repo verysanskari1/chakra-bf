@@ -33,6 +33,11 @@ match the aspect ratio.
 
 The Chakra logo here is a placeholder reproduction — drop in the official Chakra SVG.
 
+> **Logo not updating?** The `src` points at exactly `images/chakra-logo.svg`. Overwrite
+> that file (same name/extension), or if your file is a PNG, save it as
+> `images/chakra-logo.png` and change the `src` in `index.html` to match. Then do a hard
+> refresh (**Cmd/Ctrl + Shift + R**) — the browser caches the old asset otherwise.
+
 ## Links
 
 - Apply (AI interview): `https://www.chakra.sh/interviewer/onboarding/0/df07gfkmcjp/30de807564929c16e5207bfe8f0be942`

@@ -21,12 +21,14 @@
   }
 
   :root {
-    --bg:    #0a0a0b;
-    --text:  #f3f3f5;
-    --muted: #94949d;
-    --navy:  #0d1430;                 /* dark text on the bright button */
-    --grad:  linear-gradient(131.95deg, #8AE9FF 26.5%, #9C99FF 215.69%);
-    --font:  "Kalice", ui-serif, Georgia, "Times New Roman", serif;
+    --bg:       #0a0a0b;
+    --text:     #f3f3f5;
+    --body:     #e3e3e8;   /* the two description paragraphs */
+    --muted:    #9a9aa3;
+    --navy:     #0d1430;   /* dark text on the bright button */
+    --grad:     linear-gradient(131.95deg, #8AE9FF 26.5%, #9C99FF 215.69%);
+    --font:     "Kalice", ui-serif, Georgia, "Times New Roman", serif;
+    --measure:  820px;     /* uniform text width across the page */
   }
 
   * { box-sizing: border-box; font-style: normal; }
@@ -37,19 +39,32 @@
     font-family: var(--font);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    /* muted colored gradients in the brand palette */
+    /* layered, muted brand-color blooms + a faint center spotlight */
     background:
-      radial-gradient(46% 38% at 16% 4%,  rgba(138,233,255,0.10), transparent 62%),
-      radial-gradient(50% 42% at 86% 14%, rgba(156,153,255,0.12), transparent 64%),
-      radial-gradient(60% 48% at 50% 108%, rgba(156,153,255,0.10), transparent 66%),
-      radial-gradient(40% 34% at 6% 78%,  rgba(138,233,255,0.07), transparent 60%),
+      radial-gradient(38% 30% at 50% 26%, rgba(255,255,255,0.04), transparent 70%),
+      radial-gradient(44% 40% at 10% 4%,  rgba(138,233,255,0.13), transparent 60%),
+      radial-gradient(48% 42% at 92% 12%, rgba(156,153,255,0.16), transparent 62%),
+      radial-gradient(58% 50% at 84% 102%, rgba(138,233,255,0.11), transparent 64%),
+      radial-gradient(52% 46% at 8% 94%,  rgba(156,153,255,0.12), transparent 64%),
       var(--bg);
     background-attachment: fixed;
   }
+  /* subtle film grain, sits above the blooms but below the text */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  section { position: relative; z-index: 1; }
 
   .col {
     width: 100%;
-    max-width: 920px;
+    max-width: 940px;
     margin-inline: auto;
     display: flex;
     flex-direction: column;
@@ -58,25 +73,22 @@
   }
 
   /* ============================ HERO ============================ */
-  /* ~90vh so the Chakra section peeks in at the bottom of the first screen */
+  /* ~90vh so the Chakra heading peeks in at the bottom of the first screen */
   .hero {
     min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 88px 28px 24px;
+    padding: 92px 32px 24px;
   }
 
   .title {
     font-weight: 400;
-    font-size: clamp(40px, 7.6vw, 88px);
-    line-height: 1.16;
+    font-size: clamp(40px, 7.4vw, 86px);
+    line-height: 1.18;
     letter-spacing: -0.018em;
     margin: 0;
     max-width: 15ch;
-    opacity: 0;
-    transform: translateY(16px);
-    animation: rise 1s cubic-bezier(.2,.8,.2,1) forwards .08s;
   }
 
   /* gradient emphasis words (regular weight, no italics) */
@@ -91,11 +103,12 @@
   .pill-wrap {
     display: inline-block;
     vertical-align: -0.16em;
-    margin: 0 0.04em 0 0.18em;
+    margin: 0 0.04em 0 0.2em;
+    --rot: -5deg;
     animation: float 6s ease-in-out infinite;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.55));
+    filter: drop-shadow(0 12px 22px rgba(0,0,0,0.55));
   }
-  .title .pill-wrap:nth-of-type(2) { animation-delay: -3s; }
+  .pill-wrap:nth-of-type(2) { --rot: 5deg; animation-delay: -3s; }
   .pill {
     display: block;
     height: 0.92em;
@@ -103,30 +116,24 @@
     aspect-ratio: 1.9 / 1;
     object-fit: cover;
     border-radius: 999px;
-    padding: 2px;                          /* gradient frame */
-    background: linear-gradient(150deg, rgba(255,255,255,0.5), rgba(255,255,255,0.06));
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.10);
-    transform: rotate(-4.5deg);
+    padding: 2px;                       /* thin gradient frame */
+    background: linear-gradient(150deg, rgba(255,255,255,0.55), rgba(255,255,255,0.08));
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+    transform: rotate(var(--rot));
     transition: transform .5s cubic-bezier(.2,.8,.2,1);
   }
-  .title .pill-wrap:nth-of-type(2) .pill { transform: rotate(4.5deg); }
-  .title:hover .pill { transform: rotate(0deg) scale(1.05); }
+  /* both pills straighten + grow uniformly on hover (no specificity clash) */
+  .title:hover .pill { transform: rotate(0deg) scale(1.06); }
 
-  .actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 48px;
-    opacity: 0;
-    animation: rise 1s ease forwards .34s;
-  }
+  .actions { display: flex; justify-content: center; }
+  .hero .actions { margin-top: 52px; }
 
-  /* ============================ BUTTON (no glow, no border) ============================ */
+  /* ============================ BUTTON (no glow, no border, no arrow) ============================ */
   .cta {
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    padding: 16px 32px;
+    padding: 16px 34px;
     border-radius: 12px;
     font-family: var(--font);
     font-size: clamp(16px, 2vw, 19px);
@@ -141,74 +148,71 @@
     transition: transform .3s cubic-bezier(.2,.8,.2,1), filter .3s ease;
   }
   .cta > * { position: relative; z-index: 2; }
-  .cta::after {                       /* shine on hover only */
+  .cta::after {                         /* shine on hover only */
     content: "";
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(115deg, transparent 36%, rgba(255,255,255,0.45) 50%, transparent 64%);
+    background: linear-gradient(115deg, transparent 36%, rgba(255,255,255,0.42) 50%, transparent 64%);
     transform: translateX(-130%);
     transition: transform .75s ease;
   }
   .cta:hover { transform: translateY(-2px); filter: brightness(1.05); }
   .cta:hover::after { transform: translateX(130%); }
   .cta:active { transform: translateY(0); }
-  .cta .arrow { transition: transform .3s ease; }
-  .cta:hover .arrow { transform: translate(4px, -3px); }
 
   /* ============================ CHAKRA ============================ */
   .chakra {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 64px 28px 120px;
+    padding: 56px 32px 128px;
   }
-  .lead {
-    font-size: clamp(24px, 3.2vw, 34px);
-    line-height: 1.42;
-    letter-spacing: -0.012em;
-    color: var(--text);
-    max-width: 680px;
-    margin: 0 auto 28px;
-  }
-  .sub {
-    font-size: clamp(17px, 2.1vw, 21px);
-    line-height: 1.62;
+  .kicker {
+    font-size: 13px;
+    letter-spacing: 3.4px;
+    text-transform: uppercase;
     color: var(--muted);
-    max-width: 560px;
+    margin: 0 0 30px;
+  }
+  /* both description paragraphs: same size + weight, uniform broad width */
+  .body {
+    font-size: clamp(21px, 2.5vw, 28px);
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    font-weight: 400;
+    color: var(--body);
+    max-width: var(--measure);
     margin: 0 auto;
   }
+  .body + .body { margin-top: 22px; }
 
   /* uploadable Chakra logo, clickable -> chakra.sh */
   .chakra-logo {
     display: inline-flex;
     align-items: center;
-    vertical-align: -0.16em;
-    margin-right: 0.12em;
+    vertical-align: -0.2em;
+    margin-right: 0.14em;
     text-decoration: none;
     transition: opacity .25s ease, transform .25s ease;
   }
   .chakra-logo img {
     display: block;
-    height: 1.04em;       /* scales with the lead text */
+    height: 1.06em;        /* scales with the paragraph text */
     width: auto;
   }
   .chakra-logo:hover { opacity: 0.8; transform: translateY(-1px); }
 
-  .chakra .actions { margin-top: 48px; animation: none; opacity: 1; }
+  .chakra .actions { margin-top: 54px; }
 
   /* ============================ KEYFRAMES ============================ */
-  @keyframes rise  { to { opacity: 1; transform: translateY(0); } }
   @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
   @keyframes drift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; }
-    .title, .actions { opacity: 1; transform: none; }
-  }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
   @media (max-width: 560px) {
     .hero { min-height: 86vh; padding: 64px 22px 16px; }
-    .chakra { padding: 48px 22px 90px; }
+    .chakra { padding: 44px 22px 96px; }
     .cta { width: 100%; justify-content: center; }
   }
 </style>
@@ -226,7 +230,6 @@
       <div class="actions">
         <a class="cta" href="https://www.chakra.sh/interviewer/onboarding/0/df07gfkmcjp/30de807564929c16e5207bfe8f0be942" target="_blank" rel="noopener">
           <span>Apply to be a boyfriend</span>
-          <span class="arrow">&rarr;</span>
         </a>
       </div>
     </div>
@@ -235,7 +238,9 @@
   <!-- ============================ SECTION 2: CHAKRA ============================ -->
   <section class="chakra">
     <div class="col">
-      <p class="lead">
+      <p class="kicker">About Chakra</p>
+
+      <p class="body">
         <a class="chakra-logo" href="https://chakra.sh" target="_blank" rel="noopener" aria-label="Chakra — opens chakra.sh">
           <img src="images/chakra-logo.svg" alt="Chakra" />
         </a>
@@ -243,7 +248,7 @@
         across voice, chat, a collaborative whiteboard, and a real code editor.
       </p>
 
-      <p class="sub">
+      <p class="body">
         It interviews for any role you can think of: software engineers, forward deployed
         engineers, AI engineers, product managers, sales reps&hellip; and,
         <span class="accent">apparently</span>, partners.
@@ -252,7 +257,6 @@
       <div class="actions">
         <a class="cta" href="https://chakra.sh" target="_blank" rel="noopener">
           <span>Try it for your team</span>
-          <span class="arrow">&rarr;</span>
         </a>
       </div>
     </div>
