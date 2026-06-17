@@ -28,15 +28,13 @@ match the aspect ratio.
 |------|------|-------------|-------|
 | `images/boyfriend.svg` | hero photo after "full-time boyfriend" | **~600 × 320 px (≈1.9:1 landscape)** | shown as a small capsule; keep the subject centered. JPG/PNG fine — if so, update the `src` extension. |
 | `images/ohshin.svg` | hero photo after "Ohshin" | **~600 × 320 px (≈1.9:1 landscape)** | same as above. |
-| `images/chakra-logo.svg` | the full Chakra logo (clickable → chakra.sh) | **SVG preferred**; or transparent PNG **~360 × 96 px** | horizontal lockup, transparent background, light/white so it reads on the dark bg. Scales with the text. |
+| `images/chakra_logo.svg` | the full Chakra logo (clickable → chakra.sh) | **SVG preferred**; or transparent PNG **~360 × 96 px** | horizontal lockup, transparent background, light/white so it reads on the dark bg. Scales with the text. |
 | `favicon.svg` | Minecraft-style 8-bit pixel heart | — | already done. |
 
-The Chakra logo here is a placeholder reproduction — drop in the official Chakra SVG.
-
-> **Logo not updating?** The `src` points at exactly `images/chakra-logo.svg`. Overwrite
-> that file (same name/extension), or if your file is a PNG, save it as
-> `images/chakra-logo.png` and change the `src` in `index.html` to match. Then do a hard
-> refresh (**Cmd/Ctrl + Shift + R**) — the browser caches the old asset otherwise.
+> **Heads up on filenames:** the `src` attributes must match the file names exactly.
+> The logo is wired to `images/chakra_logo.svg` (underscore). If you swap any asset for a
+> different format/name, update the matching `src` in `index.html` and hard-refresh
+> (**Cmd/Ctrl + Shift + R**) to clear the cached version.
 
 ## Links
 
