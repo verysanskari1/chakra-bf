@@ -18,14 +18,20 @@ Two sections, fully dark mode, with muted brand-color gradients in the backgroun
 
 Bundled `fonts/Kalice-Regular.woff2`, loaded via `@font-face`. Regular only — no italics.
 
-## Assets you can swap
+## Assets you upload (recommended dimensions)
 
-- `images/boyfriend.svg` / `images/ohshin.svg` — the two inline hero images
-  (placeholders). Replace the files (same name) or repoint the `src` in `index.html`.
-  Roughly landscape crops look best.
-- `favicon.svg` — Minecraft-style 8-bit pixel heart.
-- **Chakra logo** — reproduced inline as an SVG mark + wordmark (the official asset
-  couldn't be fetched from this environment). Drop in the real Chakra SVG if you have it.
+Replace these files (keep the same name), or repoint the `src` in `index.html`.
+All three are center-cropped/scaled with CSS, so exact pixels aren't critical — just
+match the aspect ratio.
+
+| File | What | Recommended | Notes |
+|------|------|-------------|-------|
+| `images/boyfriend.svg` | hero photo after "full-time boyfriend" | **~600 × 320 px (≈1.9:1 landscape)** | shown as a small capsule; keep the subject centered. JPG/PNG fine — if so, update the `src` extension. |
+| `images/ohshin.svg` | hero photo after "Ohshin" | **~600 × 320 px (≈1.9:1 landscape)** | same as above. |
+| `images/chakra-logo.svg` | the full Chakra logo (clickable → chakra.sh) | **SVG preferred**; or transparent PNG **~360 × 96 px** | horizontal lockup, transparent background, light/white so it reads on the dark bg. Scales with the text. |
+| `favicon.svg` | Minecraft-style 8-bit pixel heart | — | already done. |
+
+The Chakra logo here is a placeholder reproduction — drop in the official Chakra SVG.
 
 ## Links
 
