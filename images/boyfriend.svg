@@ -10,5 +10,5 @@
     <circle cx="160" cy="84" r="36"/>
     <path d="M92 200 a68 60 0 0 1 136 0 z"/>
   </g>
-  <text x="160" y="186" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="22" fill="rgba(12,14,34,0.8)">you?</text>
+  <text x="160" y="186" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="rgba(12,14,34,0.8)">you?</text>
 </svg>
