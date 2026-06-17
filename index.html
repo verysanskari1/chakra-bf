@@ -39,28 +39,37 @@
     font-family: var(--font);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    /* layered, muted brand-color blooms + a faint center spotlight */
-    background:
-      radial-gradient(38% 30% at 50% 26%, rgba(255,255,255,0.04), transparent 70%),
-      radial-gradient(44% 40% at 10% 4%,  rgba(138,233,255,0.13), transparent 60%),
-      radial-gradient(48% 42% at 92% 12%, rgba(156,153,255,0.16), transparent 62%),
-      radial-gradient(58% 50% at 84% 102%, rgba(138,233,255,0.11), transparent 64%),
-      radial-gradient(52% 46% at 8% 94%,  rgba(156,153,255,0.12), transparent 64%),
-      var(--bg);
-    background-attachment: fixed;
+    background: var(--bg);
   }
-  /* subtle film grain, sits above the blooms but below the text */
+
+  /* animated aurora of brand-color blooms */
+  .aurora {
+    position: fixed;
+    inset: -25%;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(38% 36% at 16% 12%, rgba(138,233,255,0.26), transparent 60%),
+      radial-gradient(42% 40% at 88% 16%, rgba(156,153,255,0.32), transparent 62%),
+      radial-gradient(46% 44% at 80% 98%, rgba(110,139,240,0.26), transparent 64%),
+      radial-gradient(44% 42% at 8% 90%,  rgba(156,153,255,0.24), transparent 64%),
+      radial-gradient(40% 34% at 50% 48%, rgba(138,233,255,0.12), transparent 70%);
+    filter: blur(14px) saturate(118%);
+    animation: aurora 24s ease-in-out infinite alternate;
+  }
+
+  /* subtle film grain, above the blooms but below the text */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
-    z-index: 0;
+    z-index: 1;
     pointer-events: none;
-    opacity: 0.045;
+    opacity: 0.05;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  section { position: relative; z-index: 1; }
+  section { position: relative; z-index: 2; }
 
   .col {
     width: 100%;
@@ -199,6 +208,11 @@
   .chakra .actions { margin-top: 54px; }
 
   /* ============================ KEYFRAMES ============================ */
+  @keyframes aurora {
+    0%   { transform: translate3d(-2.5%, -1.5%, 0) scale(1.05) rotate(-1deg); }
+    50%  { transform: translate3d(2%, 1%, 0)       scale(1.12) rotate(1.5deg); }
+    100% { transform: translate3d(1.5%, 2.5%, 0)   scale(1.08) rotate(0deg); }
+  }
   @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
   @keyframes drift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
@@ -211,6 +225,8 @@
 </style>
 </head>
 <body>
+
+  <div class="aurora" aria-hidden="true"></div>
 
   <!-- ============================ SECTION 1: HERO ============================ -->
   <section class="hero">
