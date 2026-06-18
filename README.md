@@ -26,8 +26,8 @@ match the aspect ratio.
 
 | File | What | Recommended | Notes |
 |------|------|-------------|-------|
-| `images/boyfriend.svg` | hero photo after "full-time boyfriend" | **~600 × 320 px (≈1.9:1 landscape)** | shown as a small capsule; keep the subject centered. JPG/PNG fine — if so, update the `src` extension. |
-| `images/ohshin.svg` | hero photo after "Ohshin" | **~600 × 320 px (≈1.9:1 landscape)** | same as above. |
+| `images/boyfriend.webp` | hero photo after "full-time boyfriend" | **~600 × 320 px (≈1.9:1 landscape)** | shown as a small capsule; keep the subject centered. JPG/PNG fine — if so, update the `src` extension. |
+| `images/ohshin.webp` | hero photo after "Ohshin" | **~600 × 320 px (≈1.9:1 landscape)** | same as above. |
 | `images/chakra_logo.svg` | the full Chakra logo (clickable → chakra.sh) | **SVG preferred**; or transparent PNG **~360 × 96 px** | horizontal lockup, transparent background, light/white so it reads on the dark bg. Scales with the text. |
 | `favicon.svg` | Minecraft-style 8-bit pixel heart | — | already done. |
 
